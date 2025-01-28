@@ -83,6 +83,8 @@ func startServer() {
 	}(s)
 
 	// Here should go the functions for each endpoint
+	// TODO: Implement a function that activates all the endpoints
+
 	http.HandleFunc(controllers.UserSignUpEndpoint.Path, func(writer http.ResponseWriter, request *http.Request) {
 		controllers.UserSignUpEndpoint.HandlerFunction(writer, request, db)
 	})
@@ -121,6 +123,24 @@ func startServer() {
 
 	http.HandleFunc(controllers.GetAllPostsByUserIDEndpoint.Path, func(writer http.ResponseWriter, request *http.Request) {
 		controllers.GetAllPostsByUserIDEndpoint.HandlerFunction(writer, request, db)
+	})
+
+	http.HandleFunc(controllers.ViewUserProfileEndpoint.Path, func(writer http.ResponseWriter, request *http.Request) {
+		controllers.ViewUserProfileEndpoint.HandlerFunction(writer, request, db)
+	})
+
+	http.HandleFunc(controllers.ViewFollowersProfileEndpoint.Path,
+		func(writer http.ResponseWriter, request *http.Request) {
+			controllers.ViewFollowersProfileEndpoint.HandlerFunction(writer, request, db)
+		})
+
+	http.HandleFunc(controllers.ViewFollowingProfileEndpoint.Path,
+		func(writer http.ResponseWriter, request *http.Request) {
+			controllers.ViewFollowingProfileEndpoint.HandlerFunction(writer, request, db)
+		})
+
+	http.HandleFunc(controllers.EditUserProfileEndpoint.Path, func(writer http.ResponseWriter, request *http.Request) {
+		controllers.EditUserProfileEndpoint.HandlerFunction(writer, request, db)
 	})
 
 	serverPort := os.Getenv("SERVER_PORT")
